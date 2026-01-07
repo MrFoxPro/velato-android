@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<manifest
+	xmlns:android='http://schemas.android.com/apk/res/android'
+	xmlns:app='http://schemas.android.com/apk/res-auto'
+	xmlns:tools='http://schemas.android.com/tools'
+   >
+   <application android:label='Velato Android'>
+      <activity android:name='.MainActivity' android:exported="true">
+         <intent-filter>
+            <category android:name='android.intent.category.LAUNCHER'/>
+            <action android:name='android.intent.action.MAIN'/>
+         </intent-filter>
+      </activity>
+   </application>
+</manifest>

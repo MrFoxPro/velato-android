@@ -1,0 +1,91 @@
+plugins {
+	id "com.android.application" version "8.13.2" apply true
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+android {
+	namespace "com.velato"
+
+	sourceSets.main {
+		manifest.srcFile "AndroidManifest.xml"
+		java.srcDirs = ["java"]
+		resources.srcDirs = ["java"]
+		res.srcDirs = ["res"]
+		assets.srcDirs = ["assets"]
+		jniLibs.srcDirs = ["native"]
+	}
+
+	buildToolsVersion "36.1.0"
+
+	compileSdk { 
+		version = release(36) {
+			it.minorApiLevel = 1
+		} 
+	}
+
+	defaultConfig {
+		applicationId "com.velato"
+
+		minSdk 29
+		targetSdk 36
+
+		ndk {
+			abiFilters "x86_64", "arm64-v8a"
+		}
+	}
+
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_17
+		targetCompatibility JavaVersion.VERSION_17
+	}
+
+	project.buildDir = ".dev/.gradle/dist";
+
+	buildFeatures {
+		buildConfig = true
+	}
+
+	lintOptions {
+		quiet true
+		checkReleaseBuilds false
+		abortOnError false
+	 }
+
+	signingConfigs {
+		debug {
+			keyAlias = "android"
+			keyPassword = "android"
+			storeFile rootProject.file(".dev/debug.keystore")
+			storePassword = "android"
+		}
+
+		release {
+			keyAlias = "android"
+			keyPassword = "android"
+			storeFile rootProject.file(".dev/debug.keystore")
+			storePassword = "android"
+		}
+	}
+
+	buildTypes {
+		debug {
+			signingConfig signingConfigs.debug
+			minifyEnabled false
+			packagingOptions {
+				doNotStrip '**/*.so'
+			}
+		}
+		release {
+			minifyEnabled true
+			signingConfig = signingConfigs.getByName("release")
+		}
+	}
+}
+
+dependencies {
+}
