@@ -255,7 +255,7 @@ unsafe fn draw_scene(ctx: &mut DrawContext, dt: i64) -> AppResult {
 
 	if FRAME % 60 == 0 {
 		alog!(
-			"build={}ms render={}ms present={}ms",
+			"velato={}ms render={}ms present={}ms",
 			T_VELATO.as_millis() / 60,
 			T_RENDER.as_millis() / 60,
 			T_PRESENT.as_millis() / 60
